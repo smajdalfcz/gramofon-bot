@@ -11,7 +11,7 @@ An unreliable discord bot which let's you and your friends (sometimes) listen to
 
 # Usage
 
-- g!play <url>
+- g!play [url]
 - g!skip
 - g!stop
 

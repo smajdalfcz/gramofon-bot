@@ -21,4 +21,4 @@ An unreliable discord bot which (sometimes) let's you and your friends listen to
 - several components communicate with each other through RabbitMQ
 - audio is extracted by yt-dl
 - there's an embed in the chat with your audio queue and stuff
-- I have been locked up in this basement for over three years, this is my only way to communicate with you, please save me before they see the commit oh no they're comming help me please help
+- I have been locked up in this basement for over three years, this is my only way to communicate with you, please save me before they see the commit oh no they're coming help me please help

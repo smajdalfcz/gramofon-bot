@@ -1,10 +1,9 @@
-FROM ubuntu:22.04
-#FROM python:3.8-buster
+FROM ubuntu:25.04
 
 RUN apt-get update -y
 RUN apt-get update -y
 RUN apt-get -y install python3 python3-pip ffmpeg curl gnupg apt-transport-https
-RUN python3 -m pip install -U discord youtube-dl pynacl pika ffmpeg pillow yt-dlp
+RUN python3 -m pip install -U discord youtube-dl pynacl pika ffmpeg pillow yt-dlp --break-system-packages
 
 RUN curl -1sLf "https://keys.openpgp.org/vks/v1/by-fingerprint/0A9AF2115F4687BD29803A206B73A36E6026DFCA" | gpg --dearmor | tee /usr/share/keyrings/com.rabbitmq.team.gpg > /dev/null
 RUN curl -1sLf "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xf77f1eda57ebb1cc" | gpg --dearmor | tee /usr/share/keyrings/net.launchpad.ppa.rabbitmq.erlang.gpg > /dev/null
@@ -17,6 +16,9 @@ RUN echo "deb-src [signed-by=/usr/share/keyrings/io.packagecloud.rabbitmq.gpg] h
 RUN apt-get --allow-unauthenticated update -y
 RUN apt-get install -y erlang-base erlang-asn1 erlang-crypto erlang-eldap erlang-ftp erlang-inets erlang-mnesia erlang-os-mon erlang-parsetools erlang-public-key erlang-runtime-tools erlang-snmp erlang-ssl erlang-syntax-tools erlang-tftp erlang-tools erlang-xmerl --fix-missing
 RUN apt-get install rabbitmq-server -y --fix-missing
+
+ENV RABBITMQ_HOME=/usr/lib/rabbitmq/lib/rabbitmq_server-4.0.5 \
+    RABBITMQ_PLUGINS_DIR=/usr/lib/rabbitmq/lib/rabbitmq_server-4.0.5/plugins
 
 RUN mkdir /gramofon && \
     mkdir /gramofon/audio
@@ -41,10 +43,3 @@ CMD rabbitmq-plugins enable rabbitmq_management && \
     rabbitmqctl list_permissions -p gramofon_broker && \
     python3 gramofon/gramofon-init.py && \
     sleep infinity
-    #service rabbitmq-server restart && \
-    #python3 /gramofon/gramofon-init.py
-    #python3 gramofon/gramofon-reader.py && \
-    #python3 gramofon/gramofon-parser.py && \
-    #python3 gramofon/gramofon-downloader.py && \
-    #python3 gramofon/gramofon-messenger.py && \
-    #python3 gramofon/gramofon-player.py

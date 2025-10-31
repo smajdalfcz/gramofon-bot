@@ -33,7 +33,7 @@ ADD gramofon-player.py gramofon/
 
 CMD rabbitmq-plugins enable rabbitmq_management && \
     service rabbitmq-server start && \
-    rabbitmqctl add_user thebigrabbit MyS3cur3Passwor_d && \
+    rabbitmqctl add_user thebigrabbit MyS3cur3Passwor_d ; \
     rabbitmqctl set_user_tags thebigrabbit administrator && \
     rabbitmqctl delete_user guest && \
     rabbitmqctl delete_vhost / && \

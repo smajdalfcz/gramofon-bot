@@ -36,9 +36,9 @@ CMD rabbitmq-plugins enable rabbitmq_management && \
     rabbitmqctl add_user thebigrabbit MyS3cur3Passwor_d ; \
     rabbitmqctl set_user_tags thebigrabbit administrator && \
     rabbitmqctl delete_user guest && \
-    rabbitmqctl delete_vhost / && \
+    rabbitmqctl delete_vhost / ; \
     rabbitmqctl add_vhost gramofon_broker && \
-    rabbitmqctl set_permissions -p gramofon_broker thebigrabbit '.*' '.*' '.*' && \
+    rabbitmqctl set_permissions -p gramofon_broker thebigrabbit ".*" ".*" ".*" && \
     rabbitmqctl list_users && \
     rabbitmqctl list_permissions -p gramofon_broker && \
     python3 gramofon/gramofon-init.py && \
